@@ -2,7 +2,7 @@
 
 VibeSense AI is a Speech Emotion Recognition project developed using Python, Streamlit, Librosa, TensorFlow, and a Convolutional Neural Network (CNN).
 
-The application analyzes speech audio and predicts the possible emotion expressed in the voice using MFCC audio features.
+The application analyzes speech audio and predicts the possible emotion expressed in the voice using MFCC (Mel-Frequency Cepstral Coefficients) audio features.
 
 ## Features
 
@@ -12,11 +12,11 @@ The application analyzes speech audio and predicts the possible emotion expresse
 - **Audio Explorer Recording:** Record audio directly or upload a WAV file to explore its audio features.
 - **Emotion Prediction:** Predicts one of eight emotion categories from speech audio.
 - **Confidence Display:** Shows the prediction confidence score.
-- **Emotion Score Visualization:** Displays scores for the different emotion categories using a graph.
+- **Emotion Score Visualization:** Displays scores for different emotion categories using a graph.
 - **Prediction History:** Maintains up to 10 recent predictions during the current session.
 - **Previous Analysis:** Select an earlier prediction to view its emotion, confidence, audio playback, and emotion score graph again.
-- **Clear Audio:** Clear the current audio recordings without deleting prediction history.
-- **Clear History:** Clear the prediction history separately.
+- **Clear Audio:** Clear the current audio without deleting prediction history.
+- **Clear History:** Clear prediction history separately.
 - **Waveform Visualization:** Displays the waveform of the selected audio.
 - **MFCC Visualization:** Displays Mel-Frequency Cepstral Coefficients extracted from the audio.
 
@@ -54,9 +54,17 @@ Place the extracted speech WAV files inside the `dataset` folder. Keep the origi
 
 ## Installation and Setup
 
-### 1. Create a Virtual Environment
+### 1. Clone or Download the Repository
 
-Open the project folder in VS Code and run these commands in Windows PowerShell:
+Download the project from GitHub:
+
+[CodeAlpha Speech Emotion Recognition Repository](https://github.com/akshithareddyramidi/CodeAlpha_Speech_Emotion_Recognition)
+
+Extract the downloaded project folder and open it in VS Code.
+
+### 2. Create a Virtual Environment
+
+Open Windows PowerShell in the project folder and run:
 
 ```powershell
 py -3.12 -m venv venv
@@ -70,16 +78,36 @@ Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\venv\Scripts\Activate.ps1
 ```
 
-### 2. Install Required Libraries
+### 3. Install Required Libraries
 
 ```powershell
 python -m pip install --upgrade pip
 pip install -r requirements.txt
 ```
 
-### 3. Add the Dataset
+### 4. Download the Pre-trained Model
 
-Place the RAVDESS speech audio WAV files inside the `dataset` folder.
+The trained model is provided separately through the GitHub Release because of its file size.
+
+Download `emotion_model.keras` from:
+
+[VibeSense AI — Version 1.0.0 Release](https://github.com/akshithareddyramidi/CodeAlpha_Speech_Emotion_Recognition/releases/tag/v1.0.0)
+
+Place the downloaded file inside the `models` folder, alongside `labels.json`.
+
+The folder should contain:
+
+```text
+models/
+    emotion_model.keras
+    labels.json
+```
+
+**Note:** The pre-trained model is required to run emotion predictions. You do not need to train the model again if you use the provided model.
+
+### 5. Add the Dataset (For Training)
+
+If you want to train the model again, download the RAVDESS audio-only speech dataset and place the WAV files inside the `dataset` folder.
 
 Example folder structure:
 
@@ -94,7 +122,7 @@ dataset/
 
 The training script processes the supported audio-only speech files.
 
-### 4. Train the Model
+### 6. Train the Model (Optional)
 
 Run this command from the project root directory:
 
@@ -110,9 +138,7 @@ models/
     labels.json
 ```
 
-The trained model is required for emotion prediction.
-
-### 5. Run the Application
+### 7. Run the Application
 
 Start the Streamlit application:
 
@@ -130,9 +156,10 @@ CodeAlpha_Speech_Emotion_Recognition/
 ├── app.py
 ├── requirements.txt
 ├── README.md
+├── .gitignore
 │
 ├── dataset/
-│   └── RAVDESS audio files
+│   └── RAVDESS audio files (used for training)
 │
 ├── models/
 │   ├── emotion_model.keras
@@ -156,11 +183,15 @@ CodeAlpha_Speech_Emotion_Recognition/
 
 ## Model Evaluation
 
-The model is trained and evaluated using a train/test split.
+The CNN model was trained and evaluated using the RAVDESS speech dataset with a train/test split.
 
-Model performance depends on the dataset, audio quality, speakers, and training configuration. Evaluation metrics such as accuracy, precision, recall, F1-score, and a confusion matrix can be used for further analysis.
+The trained model achieved approximately **40.3% test accuracy**.
 
-Do not interpret predictions as definitive measurements of a person's actual emotional state.
+Model performance depends on the dataset, audio quality, speakers, and training configuration. Further improvements can be explored through data augmentation, model tuning, and additional training.
+
+Evaluation metrics such as accuracy, precision, recall, F1-score, and a confusion matrix can be used for more detailed performance analysis.
+
+The displayed confidence score represents the model's prediction score and should not be interpreted as a guarantee that the predicted emotion is correct.
 
 ## Notes and Responsible Use
 
@@ -169,4 +200,9 @@ Do not interpret predictions as definitive measurements of a person's actual emo
 - Performance may vary with speakers, accents, languages, microphones, and background noise.
 - Prediction history is maintained only during the current application session and is not permanently stored.
 - The RAVDESS dataset should be used according to its licensing and attribution requirements.
+- Emotion predictions should not be treated as definitive measurements of a person's actual emotional state.
 - Understand, test, and explain the implementation before submitting the project.
+
+## Author
+
+Developed as part of the CodeAlpha Internship Project.
