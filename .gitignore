@@ -1,0 +1,12 @@
+
+venv/
+__pycache__/
+*.py[cod]
+.streamlit/
+
+dataset/*
+!dataset/.gitkeep
+
+Audio_Speech_Actors_01-24/
+CodeAlpha_Speech_Emotion_Recognition/
+
